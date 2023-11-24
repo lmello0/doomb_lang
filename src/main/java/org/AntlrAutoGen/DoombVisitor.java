@@ -35,12 +35,6 @@ public interface DoombVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExec_block(DoombParser.Exec_blockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DoombParser#type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitType(DoombParser.TypeContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link DoombParser#string}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -52,12 +46,6 @@ public interface DoombVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVariable(DoombParser.VariableContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DoombParser#declaration}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclaration(DoombParser.DeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DoombParser#variable_declaration}.
 	 * @param ctx the parse tree

@@ -1,0 +1,13 @@
+declare {
+    height: double = 0;
+    weight: double = 0;
+
+    bmi: double = 0;
+    interpret: str = '';
+
+    count: int = 0;
+}
+
+main {
+    putStr -> 'Peso (em quilos):';
+}

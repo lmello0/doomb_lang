@@ -48,16 +48,6 @@ public interface DoombListener extends ParseTreeListener {
 	 */
 	void exitExec_block(DoombParser.Exec_blockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DoombParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void enterType(DoombParser.TypeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DoombParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void exitType(DoombParser.TypeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link DoombParser#string}.
 	 * @param ctx the parse tree
 	 */
@@ -77,16 +67,6 @@ public interface DoombListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVariable(DoombParser.VariableContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link DoombParser#declaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclaration(DoombParser.DeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DoombParser#declaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclaration(DoombParser.DeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#variable_declaration}.
 	 * @param ctx the parse tree

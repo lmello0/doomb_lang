@@ -65,18 +65,6 @@ public class DoombBaseListener implements DoombListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterType(DoombParser.TypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitType(DoombParser.TypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterString(DoombParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -96,18 +84,6 @@ public class DoombBaseListener implements DoombListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVariable(DoombParser.VariableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeclaration(DoombParser.DeclarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclaration(DoombParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

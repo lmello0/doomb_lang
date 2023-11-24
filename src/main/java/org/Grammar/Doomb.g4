@@ -15,11 +15,11 @@ BREAK: 'break';
 RETURN: 'return';
 FOR: 'for';
 WHILE: 'while';
-INT: 'int';
-DOUBLE: 'double';
-NUMBER: 'number';
-STRING: 'str';
-BOOLEAN: 'boolean';
+fragment INT: 'int';
+fragment DOUBLE: 'double';
+fragment NUMBER: 'number';
+fragment STR: 'str';
+fragment BOOLEAN: 'boolean';
 DOUBLE_COLON: '::';
 COLON: ':';
 RIGHT_ARROW: '->';
@@ -46,6 +46,7 @@ DOUBLE_DEF: DIGIT+ '.' DIGIT+;
 NUMBER_DEF: INT_DEF | DOUBLE_DEF;
 STRING_DEF: '\'' ~'\''* '\'';
 BOOLEAN_DEF: 'TRUE' | 'FALSE';
+TYPE: INT | DOUBLE | NUMBER | STR | BOOLEAN;
 
 // Variable naming rule
 ID: (LOWER | UPPER) (LOWER | UPPER | '_' | '$')* | ('_' | '$') (LOWER | UPPER | '_' | '$')+;
@@ -61,74 +62,65 @@ COMMA: ',';
 
 // Parser Rules (grammar)
 program:
-    declare_block*
+    declare_block?
     main_block;
 
-declare_block: DECLARE OPEN_CBRACKET declaration* CLOSE_CBRACKET;
-// declare { declarations }
+declare_block: DECLARE OPEN_CBRACKET (variable_declaration | function_declaration)* CLOSE_CBRACKET;
 
 main_block: MAIN exec_block EOF;
-// main { exec_block }
 
 exec_block: OPEN_CBRACKET statement+ CLOSE_CBRACKET;
 
-type: INT // int
-    | DOUBLE // double
-    | NUMBER // number
-    | STRING // str
-    | BOOLEAN // boolean
-    ;
+//type: INT
+//    | DOUBLE
+//    | NUMBER
+//    | STR
+//    | BOOLEAN
+//    ;
 
 string: STRING_DEF (CONCAT_OP (STRING_DEF | ID))*;
 
 variable: ID | NUMBER_DEF | INT_DEF | DOUBLE_DEF | string | BOOLEAN_DEF;
 
-declaration: variable_declaration | function_declaration;
+variable_declaration: ID COLON TYPE ASSIGN_OP (ID | INT_DEF | DOUBLE_DEF | NUMBER_DEF | string) DEL;
 
-variable_declaration: ID COLON type ASSIGN_OP (ID | INT_DEF | DOUBLE_DEF | NUMBER_DEF | string) DEL;
-// height: double = 'asdasd' || weight;
-
-function_declaration: ID DOUBLE_COLON parameter_list COLON type OPEN_CBRACKET statement+ CLOSE_CBRACKET;
-// calculateBMI :: double height, double weight : double { statements+ }
+function_declaration: ID DOUBLE_COLON parameter_list COLON TYPE OPEN_CBRACKET statement+ CLOSE_CBRACKET;
 
 function_call: ID RIGHT_ARROW function_params;
-// funcao -> variavel, outra_variavel
 
-parameter_list: (type ID (COMMA type ID)*)?;
-// int asdasd, int asdasd
+parameter_list: (TYPE ID (COMMA TYPE ID)*)?;
 
 function_params: (variable (COMMA variable)*)?;
-// variavel, outra_variavel, ...
 
-statement: expr //
-         | if_statement // if (variavel == variavel) { statements } else { statements }
-         | for_statement // for (expr; variavel == variavel; expr) exec_block
-         | while_statement // while (true) exec_block
+statement: expr
+         | if_statement
+         | for_statement
+         | while_statement
          | jump_statement
          ;
 
-jump_statement: (CONTINUE // continue;
-              | BREAK // break;
-              | RETURN (expr | string)? // return; | return variavel; | return 'variavel';
+jump_statement: (CONTINUE
+              | BREAK
+              | RETURN (expr | string)?
               )
               DEL
               ;
 
-expr:(ID ASSIGN_OP expr // variavel = ;
-    | ID ASSIGN_OP math_expr // variavel = 1 + (2 * 3);
-    | ID ASSIGN_OP variable // variavel = variavel;
-    | ID ASSIGN_OP function_call // variavel = funcao -> outra_variavel, mais_uma_variavel;
-    | function_call // putStr -> 'asdasdasd' || asdasd || 'asda';
-    ) DEL // ;
-    | OPEN_PAREN expr CLOSE_PAREN // ()
-    | EXCLAMATION expr // !variavel
-    | math_expr // 1 + (2 * 3)
+expr:(ID ASSIGN_OP expr
+    | ID ASSIGN_OP math_expr
+    | ID ASSIGN_OP variable
+    | ID ASSIGN_OP function_call
+    | function_call
+    ) DEL
+    | OPEN_PAREN expr CLOSE_PAREN
+    | EXCLAMATION expr
+    | math_expr
     ;
 
-math_expr: ADD_OP value // -1
-         | math_expr MULT_OP math_expr // -1 (*|/) 1 
-         | math_expr ADD_OP math_expr // -1 (+|-) 1
-         | value // variavel | 123123 | 0.1 | (123123 | 0.1) | (math_expr)
+math_expr: ADD_OP value
+         | math_expr MULT_OP math_expr
+         | math_expr ADD_OP math_expr
+         | value
          ;
 
 value: ID
@@ -147,16 +139,11 @@ relational_op: NOT_EQUAL_OP
              ;
 
 bool_op: BOOL_OPERATOR;
-// and | or
 
 if_statement: IF OPEN_PAREN comparation CLOSE_PAREN exec_block (ELSE exec_block)?;
-// if (variavel == variavel) { statements } else { statements }
 
 comparation: variable relational_op variable (bool_op variable relational_op variable)?;
-// variavel == variavel and variavel2 == variavel2
 
 for_statement: FOR OPEN_PAREN expr DEL comparation DEL expr CLOSE_PAREN exec_block;
-// for (expr; variavel == variavel; expr) exec_block
 
 while_statement: WHILE OPEN_PAREN expr CLOSE_PAREN exec_block;
-// while (true) exec_block
