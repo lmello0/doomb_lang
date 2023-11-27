@@ -18,12 +18,13 @@ WHILE: 'while';
 fragment INT: 'int';
 fragment DOUBLE: 'double';
 fragment NUMBER: 'number';
-fragment STR: 'str';
+fragment STR: 'string';
 fragment BOOLEAN: 'boolean';
 DOUBLE_COLON: '::';
 COLON: ':';
 RIGHT_ARROW: '->';
 EXCLAMATION: '!';
+DOUBLE_SLASH: '//';
 
 // Math operators
 ADD_OP: '+' | '-';
@@ -60,29 +61,25 @@ OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
 COMMA: ',';
 
+// Comment
+COMMENT: DOUBLE_SLASH ~[\r\n]* -> skip;
+
 // Parser Rules (grammar)
 program:
     declare_block?
     main_block;
 
-declare_block: DECLARE OPEN_CBRACKET (variable_declaration | function_declaration)* CLOSE_CBRACKET;
+declare_block: DECLARE OPEN_CBRACKET (variable_declaration DEL | function_declaration)* CLOSE_CBRACKET;
 
 main_block: MAIN exec_block EOF;
 
 exec_block: OPEN_CBRACKET statement+ CLOSE_CBRACKET;
 
-//type: INT
-//    | DOUBLE
-//    | NUMBER
-//    | STR
-//    | BOOLEAN
-//    ;
-
 string: STRING_DEF (CONCAT_OP (STRING_DEF | ID))*;
 
-variable: ID | NUMBER_DEF | INT_DEF | DOUBLE_DEF | string | BOOLEAN_DEF;
+variable: ID | NUMBER_DEF | INT_DEF | DOUBLE_DEF | BOOLEAN_DEF | string;
 
-variable_declaration: ID COLON TYPE ASSIGN_OP (ID | INT_DEF | DOUBLE_DEF | NUMBER_DEF | string) DEL;
+variable_declaration: ID COLON TYPE ASSIGN_OP (ID | INT_DEF | DOUBLE_DEF | NUMBER_DEF | BOOLEAN_DEF | string);
 
 function_declaration: ID DOUBLE_COLON parameter_list COLON TYPE OPEN_CBRACKET statement+ CLOSE_CBRACKET;
 
@@ -90,7 +87,7 @@ function_call: ID RIGHT_ARROW function_params;
 
 parameter_list: (TYPE ID (COMMA TYPE ID)*)?;
 
-function_params: (variable (COMMA variable)*)?;
+function_params: ((TYPE | variable) (COMMA (TYPE | variable))*)?;
 
 statement: expr
          | if_statement
@@ -106,20 +103,16 @@ jump_statement: (CONTINUE
               DEL
               ;
 
-expr:(ID ASSIGN_OP expr
-    | ID ASSIGN_OP math_expr
-    | ID ASSIGN_OP variable
-    | ID ASSIGN_OP function_call
+expr:(ID ASSIGN_OP expr | math_expr | variable | function_call) DEL
     | function_call
-    ) DEL
     | OPEN_PAREN expr CLOSE_PAREN
     | EXCLAMATION expr
     | math_expr
     ;
 
 math_expr: ADD_OP value
-         | math_expr MULT_OP math_expr
-         | math_expr ADD_OP math_expr
+         | math_expr (MULT_OP | ADD_OP) math_expr
+         | value ADD_OP ADD_OP
          | value
          ;
 
@@ -144,6 +137,6 @@ if_statement: IF OPEN_PAREN comparation CLOSE_PAREN exec_block (ELSE exec_block)
 
 comparation: variable relational_op variable (bool_op variable relational_op variable)?;
 
-for_statement: FOR OPEN_PAREN expr DEL comparation DEL expr CLOSE_PAREN exec_block;
+for_statement: FOR OPEN_PAREN variable_declaration DEL comparation DEL expr CLOSE_PAREN exec_block;
 
 while_statement: WHILE OPEN_PAREN expr CLOSE_PAREN exec_block;

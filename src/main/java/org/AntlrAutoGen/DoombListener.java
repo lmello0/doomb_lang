@@ -19,9 +19,10 @@ public interface DoombListener extends ParseTreeListener {
 	void exitProgram(DoombParser.ProgramContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#declare_block}.
+	 *
 	 * @param ctx the parse tree
-	 */
-	void enterDeclare_block(DoombParser.Declare_blockContext ctx);
+     */
+	String enterDeclare_block(DoombParser.Declare_blockContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#declare_block}.
 	 * @param ctx the parse tree
@@ -29,9 +30,10 @@ public interface DoombListener extends ParseTreeListener {
 	void exitDeclare_block(DoombParser.Declare_blockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#main_block}.
+	 *
 	 * @param ctx the parse tree
-	 */
-	void enterMain_block(DoombParser.Main_blockContext ctx);
+     */
+	String enterMain_block(DoombParser.Main_blockContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#main_block}.
 	 * @param ctx the parse tree
@@ -39,9 +41,10 @@ public interface DoombListener extends ParseTreeListener {
 	void exitMain_block(DoombParser.Main_blockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#exec_block}.
+	 *
 	 * @param ctx the parse tree
-	 */
-	void enterExec_block(DoombParser.Exec_blockContext ctx);
+     */
+	String enterExec_block(DoombParser.Exec_blockContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#exec_block}.
 	 * @param ctx the parse tree
@@ -49,9 +52,10 @@ public interface DoombListener extends ParseTreeListener {
 	void exitExec_block(DoombParser.Exec_blockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#string}.
+	 *
 	 * @param ctx the parse tree
-	 */
-	void enterString(DoombParser.StringContext ctx);
+     */
+	String enterString(DoombParser.StringContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#string}.
 	 * @param ctx the parse tree
@@ -59,9 +63,10 @@ public interface DoombListener extends ParseTreeListener {
 	void exitString(DoombParser.StringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#variable}.
+	 *
 	 * @param ctx the parse tree
 	 */
-	void enterVariable(DoombParser.VariableContext ctx);
+	String enterVariable(DoombParser.VariableContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#variable}.
 	 * @param ctx the parse tree
@@ -69,9 +74,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitVariable(DoombParser.VariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#variable_declaration}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterVariable_declaration(DoombParser.Variable_declarationContext ctx);
+	String enterVariable_declaration(DoombParser.Variable_declarationContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#variable_declaration}.
 	 * @param ctx the parse tree
@@ -79,9 +86,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitVariable_declaration(DoombParser.Variable_declarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#function_declaration}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterFunction_declaration(DoombParser.Function_declarationContext ctx);
+	String enterFunction_declaration(DoombParser.Function_declarationContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#function_declaration}.
 	 * @param ctx the parse tree
@@ -89,9 +98,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitFunction_declaration(DoombParser.Function_declarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#function_call}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterFunction_call(DoombParser.Function_callContext ctx);
+	String enterFunction_call(DoombParser.Function_callContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#function_call}.
 	 * @param ctx the parse tree
@@ -109,9 +120,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitParameter_list(DoombParser.Parameter_listContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#function_params}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterFunction_params(DoombParser.Function_paramsContext ctx);
+	String enterFunction_params(DoombParser.Function_paramsContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#function_params}.
 	 * @param ctx the parse tree
@@ -119,9 +132,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitFunction_params(DoombParser.Function_paramsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#statement}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterStatement(DoombParser.StatementContext ctx);
+	String enterStatement(DoombParser.StatementContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#statement}.
 	 * @param ctx the parse tree
@@ -129,9 +144,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitStatement(DoombParser.StatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#jump_statement}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterJump_statement(DoombParser.Jump_statementContext ctx);
+	String enterJump_statement(DoombParser.Jump_statementContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#jump_statement}.
 	 * @param ctx the parse tree
@@ -139,9 +156,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitJump_statement(DoombParser.Jump_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#expr}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterExpr(DoombParser.ExprContext ctx);
+	String enterExpr(DoombParser.ExprContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#expr}.
 	 * @param ctx the parse tree
@@ -149,9 +168,10 @@ public interface DoombListener extends ParseTreeListener {
 	void exitExpr(DoombParser.ExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#math_expr}.
+	 *
 	 * @param ctx the parse tree
-	 */
-	void enterMath_expr(DoombParser.Math_exprContext ctx);
+     */
+	String enterMath_expr(DoombParser.Math_exprContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#math_expr}.
 	 * @param ctx the parse tree
@@ -159,9 +179,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitMath_expr(DoombParser.Math_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#value}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterValue(DoombParser.ValueContext ctx);
+	String enterValue(DoombParser.ValueContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#value}.
 	 * @param ctx the parse tree
@@ -189,9 +211,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitBool_op(DoombParser.Bool_opContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#if_statement}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterIf_statement(DoombParser.If_statementContext ctx);
+	String enterIf_statement(DoombParser.If_statementContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#if_statement}.
 	 * @param ctx the parse tree
@@ -199,9 +223,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitIf_statement(DoombParser.If_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#comparation}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterComparation(DoombParser.ComparationContext ctx);
+	String enterComparation(DoombParser.ComparationContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#comparation}.
 	 * @param ctx the parse tree
@@ -209,9 +235,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitComparation(DoombParser.ComparationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#for_statement}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterFor_statement(DoombParser.For_statementContext ctx);
+	String enterFor_statement(DoombParser.For_statementContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#for_statement}.
 	 * @param ctx the parse tree
@@ -219,9 +247,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitFor_statement(DoombParser.For_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#while_statement}.
+	 *
 	 * @param ctx the parse tree
+	 * 
 	 */
-	void enterWhile_statement(DoombParser.While_statementContext ctx);
+	String enterWhile_statement(DoombParser.While_statementContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#while_statement}.
 	 * @param ctx the parse tree
