@@ -1735,6 +1735,12 @@ public class DoombParser extends Parser {
 		public Bool_opContext bool_op() {
 			return getRuleContext(Bool_opContext.class,0);
 		}
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
 		public ComparationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1759,30 +1765,47 @@ public class DoombParser extends Parser {
 		enterRule(_localctx, 38, RULE_comparation);
 		int _la;
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(226);
-			variable();
-			setState(227);
-			relational_op();
-			setState(228);
-			variable();
-			setState(234);
+			setState(240);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==BOOL_OPERATOR) {
+			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(229);
-				bool_op();
-				setState(230);
+				setState(226);
 				variable();
-				setState(231);
+				setState(227);
 				relational_op();
-				setState(232);
+				setState(228);
 				variable();
+				setState(234);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==BOOL_OPERATOR) {
+					{
+					setState(229);
+					bool_op();
+					setState(230);
+					variable();
+					setState(231);
+					relational_op();
+					setState(232);
+					variable();
+					}
 				}
-			}
 
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(236);
+				expr();
+				setState(237);
+				relational_op();
+				setState(238);
+				expr();
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -1842,23 +1865,23 @@ public class DoombParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(236);
-			match(FOR);
-			setState(237);
-			match(OPEN_PAREN);
-			setState(238);
-			variable_declaration();
-			setState(239);
-			match(DEL);
-			setState(240);
-			comparation();
-			setState(241);
-			match(DEL);
 			setState(242);
-			expr();
+			match(FOR);
 			setState(243);
-			match(CLOSE_PAREN);
+			match(OPEN_PAREN);
 			setState(244);
+			variable_declaration();
+			setState(245);
+			match(DEL);
+			setState(246);
+			comparation();
+			setState(247);
+			match(DEL);
+			setState(248);
+			expr();
+			setState(249);
+			match(CLOSE_PAREN);
+			setState(250);
 			exec_block();
 			}
 		}
@@ -1909,15 +1932,15 @@ public class DoombParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(246);
+			setState(252);
 			match(WHILE);
-			setState(247);
+			setState(253);
 			match(OPEN_PAREN);
-			setState(248);
+			setState(254);
 			expr();
-			setState(249);
+			setState(255);
 			match(CLOSE_PAREN);
-			setState(250);
+			setState(256);
 			exec_block();
 			}
 		}
@@ -1948,7 +1971,7 @@ public class DoombParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001(\u00fd\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001(\u0103\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -1983,12 +2006,13 @@ public class DoombParser extends Parser {
 		"\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012"+
 		"\u0003\u0012\u00e1\b\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013"+
 		"\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0003\u0013\u00eb\b\u0013"+
+		"\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0003\u0013\u00f1\b\u0013"+
 		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
 		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0015\u0001\u0015"+
 		"\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0000\u0001"+
 		"\u001c\u0016\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016"+
 		"\u0018\u001a\u001c\u001e \"$&(*\u0000\u0003\u0002\u0000\u001d\u001d  "+
-		"\u0001\u0000\u000f\u0010\u0001\u0000\u0011\u0016\u0114\u0000-\u0001\u0000"+
+		"\u0001\u0000\u000f\u0010\u0001\u0000\u0011\u0016\u011b\u0000-\u0001\u0000"+
 		"\u0000\u0000\u00021\u0001\u0000\u0000\u0000\u0004>\u0001\u0000\u0000\u0000"+
 		"\u0006B\u0001\u0000\u0000\u0000\bJ\u0001\u0000\u0000\u0000\nX\u0001\u0000"+
 		"\u0000\u0000\fZ\u0001\u0000\u0000\u0000\u000ef\u0001\u0000\u0000\u0000"+
@@ -1997,8 +2021,8 @@ public class DoombParser extends Parser {
 		"\u00a1\u0001\u0000\u0000\u0000\u001a\u00b7\u0001\u0000\u0000\u0000\u001c"+
 		"\u00c1\u0001\u0000\u0000\u0000\u001e\u00d3\u0001\u0000\u0000\u0000 \u00d5"+
 		"\u0001\u0000\u0000\u0000\"\u00d7\u0001\u0000\u0000\u0000$\u00d9\u0001"+
-		"\u0000\u0000\u0000&\u00e2\u0001\u0000\u0000\u0000(\u00ec\u0001\u0000\u0000"+
-		"\u0000*\u00f6\u0001\u0000\u0000\u0000,.\u0003\u0002\u0001\u0000-,\u0001"+
+		"\u0000\u0000\u0000&\u00f0\u0001\u0000\u0000\u0000(\u00f2\u0001\u0000\u0000"+
+		"\u0000*\u00fc\u0001\u0000\u0000\u0000,.\u0003\u0002\u0001\u0000-,\u0001"+
 		"\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000./\u0001\u0000\u0000\u0000"+
 		"/0\u0003\u0004\u0002\u00000\u0001\u0001\u0000\u0000\u000012\u0005\u0001"+
 		"\u0000\u000029\u0005#\u0000\u000034\u0003\f\u0006\u000045\u0005\"\u0000"+
@@ -2100,16 +2124,19 @@ public class DoombParser extends Parser {
 		"\"\u0011\u0000\u00e6\u00e7\u0003\n\u0005\u0000\u00e7\u00e8\u0003 \u0010"+
 		"\u0000\u00e8\u00e9\u0003\n\u0005\u0000\u00e9\u00eb\u0001\u0000\u0000\u0000"+
 		"\u00ea\u00e5\u0001\u0000\u0000\u0000\u00ea\u00eb\u0001\u0000\u0000\u0000"+
-		"\u00eb\'\u0001\u0000\u0000\u0000\u00ec\u00ed\u0005\b\u0000\u0000\u00ed"+
-		"\u00ee\u0005%\u0000\u0000\u00ee\u00ef\u0003\f\u0006\u0000\u00ef\u00f0"+
-		"\u0005\"\u0000\u0000\u00f0\u00f1\u0003&\u0013\u0000\u00f1\u00f2\u0005"+
-		"\"\u0000\u0000\u00f2\u00f3\u0003\u001a\r\u0000\u00f3\u00f4\u0005&\u0000"+
-		"\u0000\u00f4\u00f5\u0003\u0006\u0003\u0000\u00f5)\u0001\u0000\u0000\u0000"+
-		"\u00f6\u00f7\u0005\t\u0000\u0000\u00f7\u00f8\u0005%\u0000\u0000\u00f8"+
-		"\u00f9\u0003\u001a\r\u0000\u00f9\u00fa\u0005&\u0000\u0000\u00fa\u00fb"+
-		"\u0003\u0006\u0003\u0000\u00fb+\u0001\u0000\u0000\u0000\u0018-79FOXdo"+
-		"~\u0081\u0085\u008a\u008e\u0091\u0098\u009f\u00a1\u00ab\u00b7\u00c1\u00c8"+
-		"\u00d3\u00e0\u00ea";
+		"\u00eb\u00f1\u0001\u0000\u0000\u0000\u00ec\u00ed\u0003\u001a\r\u0000\u00ed"+
+		"\u00ee\u0003 \u0010\u0000\u00ee\u00ef\u0003\u001a\r\u0000\u00ef\u00f1"+
+		"\u0001\u0000\u0000\u0000\u00f0\u00e2\u0001\u0000\u0000\u0000\u00f0\u00ec"+
+		"\u0001\u0000\u0000\u0000\u00f1\'\u0001\u0000\u0000\u0000\u00f2\u00f3\u0005"+
+		"\b\u0000\u0000\u00f3\u00f4\u0005%\u0000\u0000\u00f4\u00f5\u0003\f\u0006"+
+		"\u0000\u00f5\u00f6\u0005\"\u0000\u0000\u00f6\u00f7\u0003&\u0013\u0000"+
+		"\u00f7\u00f8\u0005\"\u0000\u0000\u00f8\u00f9\u0003\u001a\r\u0000\u00f9"+
+		"\u00fa\u0005&\u0000\u0000\u00fa\u00fb\u0003\u0006\u0003\u0000\u00fb)\u0001"+
+		"\u0000\u0000\u0000\u00fc\u00fd\u0005\t\u0000\u0000\u00fd\u00fe\u0005%"+
+		"\u0000\u0000\u00fe\u00ff\u0003\u001a\r\u0000\u00ff\u0100\u0005&\u0000"+
+		"\u0000\u0100\u0101\u0003\u0006\u0003\u0000\u0101+\u0001\u0000\u0000\u0000"+
+		"\u0019-79FOXdo~\u0081\u0085\u008a\u008e\u0091\u0098\u009f\u00a1\u00ab"+
+		"\u00b7\u00c1\u00c8\u00d3\u00e0\u00ea\u00f0";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

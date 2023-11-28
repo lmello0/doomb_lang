@@ -33,7 +33,9 @@ public class DoombBaseListener implements DoombListener {
 
 		javaCode.add("public class Out {");
 
-		javaCode.add(enterDeclare_block(ctx.declare_block()));
+		if (ctx.declare_block() != null) {
+			javaCode.add(enterDeclare_block(ctx.declare_block()));
+		}
 
 		javaCode.add(enterMain_block(ctx.main_block()));
 	}
@@ -224,26 +226,7 @@ public class DoombBaseListener implements DoombListener {
 
 		functionList.add(functionData);
 
-		List<TerminalNode> ids = ctx.parameter_list().ID();
-		List<TerminalNode> types = ctx.parameter_list().TYPE();
-
-		int paramLength = ids.size();
-
-		for (int i = 0; i < paramLength; i++) {
-			if (i != paramLength-1) {
-				function.append(types.get(i))
-					.append(" ")
-					.append(ids.get(i))
-					.append(", ");
-
-				continue;
-			}
-
-			function
-					.append(types.get(i))
-					.append(" ")
-					.append(ids.get(i));
-		}
+		function.append(enterParameter_list(ctx.parameter_list()));
 
 		function.append(") ").append(ctx.OPEN_CBRACKET());
 
@@ -306,8 +289,31 @@ public class DoombBaseListener implements DoombListener {
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
+	 *
+	 * @return
 	 */
-	@Override public void enterParameter_list(DoombParser.Parameter_listContext ctx) { }
+	@Override public String enterParameter_list(DoombParser.Parameter_listContext ctx) {
+		StringBuilder builder = new StringBuilder();
+
+		int paramLength = ctx.ID().size();
+		for (int i = 0; i < paramLength; i++) {
+			if (i != paramLength-1) {
+				builder.append(ctx.TYPE().get(i))
+					.append(" ")
+					.append(ctx.ID().get(i))
+					.append(", ");
+
+				continue;
+			}
+
+			builder
+					.append(ctx.TYPE().get(i))
+					.append(" ")
+					.append(ctx.ID().get(i));
+		}
+
+		return builder.toString();
+	}
 	/**
 	 * {@inheritDoc}
 	 *

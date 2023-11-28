@@ -63,6 +63,8 @@ public class Doomb {
 
         String javaCode = listener.getJavaCode();
 
+        System.out.println(javaCode);
+
         JavaMemoryCompiler.compile(javaCode);
 
         Files.createDirectories(Paths.get(outPath));
