@@ -45,6 +45,13 @@ public class Doomb {
             }
         }
 
+        StringBuilder concArgs = new StringBuilder();
+        for (String arg : args) {
+            concArgs.append(arg);
+        }
+
+        boolean showCode = concArgs.indexOf("--show") != -1;
+
         CharStream input = CharStreams.fromFileName(file.getAbsolutePath());
 
         DoombLexer lexer = new DoombLexer(input);
@@ -63,7 +70,7 @@ public class Doomb {
 
         String javaCode = listener.getJavaCode();
 
-        System.out.println(javaCode);
+        if (showCode) System.out.println(javaCode);
 
         JavaMemoryCompiler.compile(javaCode);
 
