@@ -76,7 +76,7 @@ public class Doomb {
 
         Files.createDirectories(Paths.get(outPath));
 
-        File outFile = new File("Out.class");
+        File outFile = new File("org.Grammar.Out.class");
         String finalPath = outFile.getAbsolutePath().replace(
                 outFile.getAbsolutePath().substring(0, outFile.getAbsolutePath().lastIndexOf("\\")),
                 outPath

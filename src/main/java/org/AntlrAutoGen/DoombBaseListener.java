@@ -31,7 +31,7 @@ public class DoombBaseListener implements DoombListener {
 	@Override public void enterProgram(DoombParser.ProgramContext ctx) {
 		javaCode.add("import java.util.*;");
 
-		javaCode.add("public class Out {");
+		javaCode.add("public class org.Grammar.Out {");
 
 		if (ctx.declare_block() != null) {
 			javaCode.add(enterDeclare_block(ctx.declare_block()));
