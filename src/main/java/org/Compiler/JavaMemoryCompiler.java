@@ -15,6 +15,7 @@ public class JavaMemoryCompiler {
         JavaCompiler.CompilationTask task = compiler.getTask(null, null, diagnostics, null, null, compilationUnits);
 
         boolean success = task.call();
+
         diagnostics.getDiagnostics().forEach(diagnostic -> {
             System.out.println(diagnostic.getCode());
             System.out.println(diagnostic.getKind());

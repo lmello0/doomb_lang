@@ -6,9 +6,9 @@
 
     <groupId>org.Compiler</groupId>
     <artifactId>Doomb</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
-    <name>doomb</name>
+    <name>Doomb</name>
 
     <url>http://maven.apache.org</url>
 
