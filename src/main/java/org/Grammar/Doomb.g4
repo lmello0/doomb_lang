@@ -72,8 +72,8 @@ bool_op: BOOL_OPERATOR;
 
 if_statement: IF OPEN_PAREN comparation CLOSE_PAREN exec_block (ELSE exec_block)?;
 
-comparation: variable relational_op variable (bool_op variable relational_op variable)?
-           | expr relational_op expr
+comparation: expr relational_op expr (bool_op comparation)?
+           | variable relational_op variable (bool_op comparation)?
            ;
 
 for_statement: FOR OPEN_PAREN variable_declaration DEL comparation DEL expr CLOSE_PAREN exec_block;

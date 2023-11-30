@@ -3,6 +3,7 @@ package org.AntlrAutoGen;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.*;
@@ -554,8 +555,32 @@ public class DoombBaseListener implements DoombListener {
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
+	 *
+	 * @return
 	 */
-	@Override public void enterRelational_op(DoombParser.Relational_opContext ctx) { }
+	@Override public String enterRelational_op(DoombParser.Relational_opContext ctx) {
+		if (ctx.NOT_EQUAL_OP() != null) {
+			return ctx.NOT_EQUAL_OP().toString();
+		}
+
+		if (ctx.EQUAL() != null) {
+			return ctx.EQUAL().toString();
+		}
+
+		if (ctx.GT_OP() != null) {
+			return ctx.GT_OP().toString();
+		}
+
+		if (ctx.GT_EQUAL_OP() != null) {
+			return ctx.GT_EQUAL_OP().toString();
+		}
+
+		if (ctx.LT_OP() != null) {
+			return ctx.LT_OP().toString();
+		}
+
+		return ctx.LT_EQUAL_OP().toString();
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -566,8 +591,16 @@ public class DoombBaseListener implements DoombListener {
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
+	 *
+	 * @return
 	 */
-	@Override public void enterBool_op(DoombParser.Bool_opContext ctx) { }
+	@Override public String enterBool_op(DoombParser.Bool_opContext ctx) {
+        if (ctx.BOOL_OPERATOR().toString().equals("and")) {
+            return "&&";
+        }
+
+        return "||";
+    }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -610,7 +643,28 @@ public class DoombBaseListener implements DoombListener {
 	 * @return
 	 */
 	@Override public String enterComparation(DoombParser.ComparationContext ctx) {
-		return ctx.getText();
+		StringBuilder builder = new StringBuilder();
+
+		int count = ctx.getChildCount();
+		for (int i = 0; i < count; i++) {
+			ParseTree child = ctx.getChild(i);
+
+			if (ctx.bool_op() != null && i >= 3) {
+				if (i == 3) {
+					builder.append(enterBool_op((DoombParser.Bool_opContext) child));
+				} else {
+					builder.append(enterComparation((DoombParser.ComparationContext) child));
+				}
+			} else if (child instanceof DoombParser.VariableContext) {
+				builder.append(enterVariable((DoombParser.VariableContext) child));
+			} else if (child instanceof DoombParser.ExprContext) {
+				builder.append(enterExpr((DoombParser.ExprContext) child));
+			} else if (child instanceof DoombParser.Relational_opContext) {
+				builder.append(enterRelational_op((DoombParser.Relational_opContext) child));
+			}
+		}
+
+		return builder.toString();
 	}
 	/**
 	 * {@inheritDoc}

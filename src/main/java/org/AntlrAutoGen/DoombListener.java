@@ -199,9 +199,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitValue(DoombParser.ValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#relational_op}.
+	 *
 	 * @param ctx the parse tree
+	 * @return
 	 */
-	void enterRelational_op(DoombParser.Relational_opContext ctx);
+	String enterRelational_op(DoombParser.Relational_opContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#relational_op}.
 	 * @param ctx the parse tree
@@ -209,9 +211,11 @@ public interface DoombListener extends ParseTreeListener {
 	void exitRelational_op(DoombParser.Relational_opContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DoombParser#bool_op}.
+	 *
 	 * @param ctx the parse tree
+	 * @return
 	 */
-	void enterBool_op(DoombParser.Bool_opContext ctx);
+	String enterBool_op(DoombParser.Bool_opContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link DoombParser#bool_op}.
 	 * @param ctx the parse tree
