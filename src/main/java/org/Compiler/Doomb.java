@@ -18,7 +18,7 @@ import java.nio.file.StandardCopyOption;
 
 public class Doomb {
     public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
+        if (args.length < 1) {
             System.out.println("No file given");
             System.exit(1);
         }
@@ -31,19 +31,17 @@ public class Doomb {
         }
 
         String outPath = "";
-        if (args[1].equals("-o") || args[1].equals("--output")) {
-            outPath = args[2];
+        if (args.length > 1 && (args[1].equals("-o") || args[1].equals("--output"))) {
+            if (args.length > 2) {
+                outPath = args[2].replace("\\", "/");
 
-            if (!(new File(outPath).isDirectory())) {
-                System.out.println("This is not a valid output location");
-                System.exit(1);
+                if (!(new File(outPath).isDirectory())) {
+                    System.out.println("This is not a valid output location");
+                    System.exit(1);
+                }
             }
 
-            outPath = outPath.replace("\\", "/");
-
-            if (!outPath.endsWith("/") || !outPath.endsWith("\\")) {
-                outPath += "";
-            }
+            outPath = outPath.endsWith("/") || outPath.endsWith("\\") ? outPath : outPath + "/";
         }
 
         StringBuilder concArgs = new StringBuilder();
@@ -86,6 +84,8 @@ public class Doomb {
                 outPath
         );
 
-        Files.move(Path.of(outFile.toURI()), Path.of(finalPath), StandardCopyOption.REPLACE_EXISTING);
+        if (!outPath.isEmpty()) {
+            Files.move(Path.of(outFile.toURI()), Path.of(finalPath), StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 }
