@@ -9,7 +9,7 @@ public class JavaMemoryCompiler {
 
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
-        JavaFileObject file = new JavaSourceFromString("org.Grammar.Out", sourceCode);
+        JavaFileObject file = new JavaSourceFromString("Out", sourceCode);
 
         Iterable<? extends JavaFileObject> compilationUnits = Collections.singletonList(file);
         JavaCompiler.CompilationTask task = compiler.getTask(null, null, diagnostics, null, null, compilationUnits);
