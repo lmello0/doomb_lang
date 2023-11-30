@@ -1,0 +1,30 @@
+declare {
+  age: int = 0;
+  year: int = 2023;
+  gen: string = '';
+
+  parseGen :: int age : string {
+    if (year - age <= 1964) {
+      return 'Boomer';
+    }
+
+    if (year - age <= 1980) {
+      return 'Gen X';
+    }
+
+    if (year - age <= 1996) {
+      return 'Millenial';
+    }
+
+    return 'Gen Z';
+  }
+}
+
+main {
+  putStr -> 'Idade: ';
+  age = readKeyboard -> int;
+
+  gen = parseGen -> age;
+
+  putStr -> 'Sua geracao eh ' || gen;
+}

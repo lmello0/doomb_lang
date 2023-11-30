@@ -1,0 +1,54 @@
+declare {
+    calculateBMI :: double weight, double height : double {
+        return weight / (height * height);
+    }
+
+    interpretBMI :: double bmi : string {
+        if (bmi < 18.5 and bmi < 18.5) {
+            return 'Abaixo do peso';
+        }
+
+        if (bmi < 24.9) {
+            return 'Peso normal';
+        }
+
+        if (bmi < 29.9) {
+            return 'Sobrepeso';
+        }
+
+        return 'Obeso';
+    }
+
+    height : double = 0.0;
+    weight : double = 0.0;
+
+    bmi : double = 0.0;
+    interpret : string = '';
+
+    count : int = 0;
+}
+
+main {
+    while(true) {
+        putStr -> 'Peso (em quilos):';
+        weight = readKeyboard -> double;
+
+        putStr -> 'Altura (em metros):';
+        height = readKeyboard -> double;
+
+        bmi = calculateBMI -> weight, height;
+        interpret = interpretBMI -> bmi;
+
+        putStr -> 'Seu IMC eh: ' || bmi || ' - ' || interpret;
+
+        if (count == 2) {
+            break;
+        }
+
+        count = count + 1;
+
+        for(i: int = 0; i < 10; i++) {
+            putStr -> i;
+        }
+    }
+}
